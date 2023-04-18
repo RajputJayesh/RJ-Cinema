@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'main' %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto my-5">
+
+        <form method="POST" action="">
+           {% csrf_token %}
+
+
+            <div class="mb-3">
+                <label for="sdetid" class="form-label">Enter Mobile Number to search ticket: </label>
+                <input type="text" class="form-control" name="mobile_num" id="sdetid" placeholder="Enter Mobile Number">
+            </div><!--Small description end-->
+
+                
+                <a href="/search/{{x.mobile_num}}"><button type="submit" class="btn btn-warning" >Search</button></a>
+
+
+            </div>
+
+
+        </form><!--form end-->
+        <div class="col-md-12 my-5">
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Mobile Number</th>
+                    <th>Show Time</th>
+                    <th>Seat Number</th>
+                    <th>Cancel Ticket</th>
+                </tr>
+                {% for x in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{x.name}}</td>
+                        <td>{{x.mobile_num}}</td>
+                        <td>{{x.show_time}}</td>
+                        <td>{{x.seat_cat}}{{x.seat_num}}</td>
+                        <td><a href="/delete/{{x.id}}"><button class="btn btn-warning">Cancel Ticket</button></a></td>
+                        
+                        
+                        
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+
+    </div><!--div for form end-->
+    
+</div>
+
+
+
+{% endblock 'main' %}
